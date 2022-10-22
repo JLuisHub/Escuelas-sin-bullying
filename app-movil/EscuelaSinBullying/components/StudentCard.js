@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     cardCont: {
         flexDirection: "row",
         backgroundColor: "white",
-        marginVertical: 10,
+        marginVertical: 3,
         maxHeight: 100,
 
         borderWidth: 3,

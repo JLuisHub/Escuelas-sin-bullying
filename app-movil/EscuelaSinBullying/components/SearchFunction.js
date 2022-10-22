@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TextInput, ListItem, ScrollView } from 'react-native';
+import { View, Text, FlatList, TextInput, ListItem, ScrollView, StyleSheet } from 'react-native';
 import StudentCard from './StudentCard';
 
 class SearchFunction extends Component {
   constructor(props) {
     super(props);
-
-    // Aqui va un query que va traer la matricula y nombres de todos los alumnos
     this.arrayNew = []
-    this.dataArrayNew = this.getData()
+    this.getData()
 
     this.state = {
-      data: this.dataArrayNew,
+      data: [],
       value: '',
     };
   }
 
   getData = () => {
     
-    fetch('http://10.2.54.125:8000/allEstudiantes/' + this.props.clave, {
+    fetch('http://192.168.1.117:8000/api/estudiantes/' + this.props.clave, {
         method: 'GET'
         //Request Type
     })
     .then((response) => response.json())
     //If response is in json then in success
     .then((response) => {
-        //Success 
+        //Success
         response.forEach(element => {
-          tempSet = {matricula: element['Matricula'], 
+          tempSet = {id: element['id'],
+                     matricula: element['Matricula'], 
                      nombre: (element['Nombre'] + ' ' + element['Apaterno'])}
-          
           this.arrayNew.push(tempSet)
         });
-        return this.arrayNew
+        this.setState({data: this.arrayNew})
     })
     //If response is not in json then in error
     .catch((error) => {
@@ -59,9 +57,12 @@ class SearchFunction extends Component {
       const textData = text.toUpperCase();
     if(text.length > 0 ){
       return itemData.indexOf(textData) > -1;
+    } else {
+      return itemData
     }
 
     });
+
     this.setState({
       data: newData,
       value: text,
@@ -71,35 +72,49 @@ class SearchFunction extends Component {
   renderHeader = () => {
     return (
       <TextInput
-        style={{backgroundColor: "white", height: 60, borderColor: '#e8e8e8', borderWidth: 3, borderRadius: 30, paddingHorizontal: 30 }}
+        style={styles.inputHeader}
         placeholder="Buscar Alumno por nombre..."
         onChangeText={text => this.searchItems(text)}
         value={this.state.value}
       />
     );
   };
+  
 
   render() {
     return (
       <View
-        style={{
-          padding: 25,
-          width: '98%',
-          alignSelf: 'center',
-          justifyContent: 'center',
-        }}>
+        style={styles.containerView}>
         <FlatList
           data={this.state.data}
+          refreshing
           renderItem={({ item }) => (
             <StudentCard matricula={item.matricula} nombre={item.nombre} />
           )}
-          keyExtractor={item => item.matricula}
-          ItemSeparatorComponent={this.renderSeparator}
+          keyExtractor={item => item.id}
+          //ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
         />
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  containerView: {
+    padding: 25,
+    width: '98%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+
+  inputHeader: {
+    backgroundColor: "white",
+    height: 60,
+    borderColor: '#e8e8e8',
+    borderWidth: 3,
+    borderRadius: 30,
+    paddingHorizontal: 30,
+  }
+})
 
 export default SearchFunction;
