@@ -20,11 +20,12 @@ use App\Http\Controllers\V1\CitatorioAPIController;
 |
 */
 
-// PARTE DE REYNA 
+// PARTE DE REYNA Y ROBERTO
 Route::group(["auth:sanctum"],function(){
     Route::post("reporte", [ReporteAPIController::class,'store'] );
-    Route::delete("reporte/{id_reporte}",[ReporteAPIController::class,'destroy']);
+    Route::delete("reportes/{id_reporte}",[ReporteAPIController::class,'destroy']);
     Route::get('estudiantes/{clave}',[EstudianteAPIController::class,'showAll']);
+    Route::get('reportes/estudiante/{id}',[ReporteAPIController::class,'show_estudiante']);
 });
 
 

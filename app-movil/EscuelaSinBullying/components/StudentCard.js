@@ -2,13 +2,13 @@ import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const StudentCard = ({matricula, nombre}) => {
+const StudentCard = ({id, matricula, nombre}) => {
 
     const navigation = useNavigation();
     //console.log(nombre)
 
     const onCardPress = () =>{
-        navigation.navigate('History',{matricula: matricula, nombre: nombre})
+        navigation.navigate('History',{id: id, matricula: matricula, nombre: nombre})
     }
 
     return (

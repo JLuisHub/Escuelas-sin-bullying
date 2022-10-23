@@ -89,7 +89,7 @@ class SearchFunction extends Component {
           data={this.state.data}
           refreshing
           renderItem={({ item }) => (
-            <StudentCard matricula={item.matricula} nombre={item.nombre} />
+            <StudentCard id={item.id} matricula={item.matricula} nombre={item.nombre} />
           )}
           keyExtractor={item => item.id}
           //ItemSeparatorComponent={this.renderSeparator}
