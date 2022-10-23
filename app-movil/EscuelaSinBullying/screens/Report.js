@@ -45,9 +45,11 @@ function Report ({ route, navigation }) {
             />
       </View>
 
-      <CustomButton 
-        text = 'Guardar'
-        onPress = {onSavePress} />
+      <View style = {styles.contButton}>
+        <CustomButton 
+            text = 'Guardar'
+            onPress = {onSavePress} />
+      </View>
     </ScrollView>
   )
 }
@@ -84,6 +86,9 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         textAlignVertical: 'top',
         padding: 10,
+    },
+    contButton: {
+        maxHeight: 70,
     }
 })
 

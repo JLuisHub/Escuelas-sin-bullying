@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     CustomButtonCont: {
         marginTop: 30,
         width: "70%",
+        maxHeight: 60,
         alignSelf: 'center'
     }
 

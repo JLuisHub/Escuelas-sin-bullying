@@ -4,7 +4,6 @@ import SearchFunction from '../components/SearchFunction'
 
 const ProfessorsHome = ({route, navigation}) => {
     const {clave} = route.params
-    //console.log({clave})
 
     return (
         <View>

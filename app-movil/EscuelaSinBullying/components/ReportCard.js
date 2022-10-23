@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 
     buttonCont: {
         alignSelf: 'flex-end',
+        maxHeight: 50,
         flex: 2
     }
 })

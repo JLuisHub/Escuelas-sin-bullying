@@ -11,7 +11,7 @@ const Button = (params) => {
     style = {[styles.buttonContainer]}
     onPress = { onPress }>
 
-        <Text style = {[styles.buttonText]}>
+        <Text style = {[styles.buttonText]} adjustsFontSizeToFit>
             {text}
         </Text>
 
@@ -27,18 +27,18 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         backgroundColor:"#001640",
-        paddingVertical: 20,
         width: "100%",
+        height: '100%',
         alignSelf: 'center',
-        borderRadius: 50,
+        justifyContent: 'center',
+        borderRadius: 20,
         borderWidth: 5,
         borderColor: "#e8e8e8",
     },
 
     buttonText: {
         color: "white",
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '600',
         alignSelf: 'center'
     }
 
