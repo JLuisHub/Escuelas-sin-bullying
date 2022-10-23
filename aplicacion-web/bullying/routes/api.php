@@ -25,7 +25,7 @@ Route::group(["auth:sanctum"],function(){
     Route::post("reporte", [ReporteAPIController::class,'store'] );
     Route::delete("reportes/{id_reporte}",[ReporteAPIController::class,'destroy']);
     Route::get('estudiantes/{clave}',[EstudianteAPIController::class,'showAll']);
-    Route::get('reportes/estudiante/{id}',[ReporteAPIController::class,'show_estudiante']);
+    Route::get('reportes/estudiante/{id}',[ReporteAPIController::class,'showEstudiante']);
 });
 
 

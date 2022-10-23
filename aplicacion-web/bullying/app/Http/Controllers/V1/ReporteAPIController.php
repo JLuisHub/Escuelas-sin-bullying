@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReporteAPIController extends Controller
 {
-    public function show_estudiante($id) {
+    public function showEstudiante($id) {
         $datos = Reporte::all() -> where('id_estudiante',$id);
         return response() -> json($datos);
     }

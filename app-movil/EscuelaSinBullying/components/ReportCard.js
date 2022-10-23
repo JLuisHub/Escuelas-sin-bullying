@@ -49,7 +49,6 @@ const ReportCard = ({id, desc, date}) => {
 
 const styles = StyleSheet.create({
     cardCont: {
-        //padding: 3,
         marginVertical: 20
     },
 

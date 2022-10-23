@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 const StudentCard = ({id, matricula, nombre}) => {
 
     const navigation = useNavigation();
-    //console.log(nombre)
 
     const onCardPress = () =>{
         navigation.navigate('History',{id: id, matricula: matricula, nombre: nombre})
