@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import SignInScreen from '../screens/SignInScreen'
 import ProfessorsHome from '../screens/ProfessorsHome'
-import ReportHistory from '../screens/ReportHistory'
+import ReportsRecord from '../screens/ReportsRecord'
 import Report from '../screens/Report'
 import LoadingScreen from '../screens/LoadingScreen'
 
@@ -22,7 +22,7 @@ const Navigation = () => {
         <Stack.Screen name='ProfessorsHome' component={ProfessorsHome} 
           options={HeaderStack("Lista de Alumnos")}/>
         
-        <Stack.Screen name='History' component={ReportHistory} 
+        <Stack.Screen name='Record' component={ReportsRecord} 
           options={HeaderStack("Historial de Reportes")} />
 
         <Stack.Screen name='Report' component={Report} 

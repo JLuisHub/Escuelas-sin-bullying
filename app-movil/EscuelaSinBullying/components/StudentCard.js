@@ -7,7 +7,7 @@ const StudentCard = ({id, matricula, nombre}) => {
     const navigation = useNavigation();
 
     const onCardPress = () =>{
-        navigation.navigate('History',{id: id, matricula: matricula, nombre: nombre})
+        navigation.navigate('Record',{id: id, matricula: matricula, nombre: nombre})
     }
 
     return (

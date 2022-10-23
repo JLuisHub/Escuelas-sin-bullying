@@ -7,7 +7,7 @@ import CustomButton from '../components/CustomButton'
 import {useNavigation} from '@react-navigation/native'
 
 const SignInScreen = () => {
-    const [matricula, setMatricula] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const accesos = {'12345': 'contra123',
@@ -17,15 +17,15 @@ const SignInScreen = () => {
     const navigation = useNavigation()
 
     const onSignInPressed = () => {
-        /*if (accesos[matricula]) {
-            if (accesos[matricula] == password) {
+        /*if (accesos[email]) {
+            if (accesos[email] == password) {
                 console.info("Sesion iniciada")
                 navigation.navigate("ProfessorsHome")
             } else{
-                console.error("Matricula o Contraseña incorrectos")
+                console.error("Email o Contraseña incorrectos")
             }
         } else {
-            console.error("Matricula o Contraseña incorrectos")
+            console.error("Email o Contraseña incorrectos")
         }*/
 
         console.assert("Sesion iniciada")
@@ -55,10 +55,10 @@ const SignInScreen = () => {
     }
 
     InsertRecord=()=>{
-        var Matricula = matricula;
+        var Email = email;
         var Password = password;
     
-        if ((Matricula.length==0) || (Password.length==0)){
+        if ((Email.length==0) || (Password.length==0)){
           alert("Required Field Is Missing!!!");
         }else{
           var APIURL = "http://127.0.0.1:8000/docs";
@@ -69,7 +69,7 @@ const SignInScreen = () => {
           };
                 
           var Data ={
-            Matricula: Matricula,
+            Email: Email,
             Password: Password
           };
     
@@ -97,11 +97,11 @@ const SignInScreen = () => {
     <View>
         <View style = {[styles.login_form_cont]}>
 
-            <Text style = {[styles.login_input_name]}>Matricula</Text>
+            <Text style = {[styles.login_input_name]}>Correo</Text>
             <CustomInput 
-                placeholder = "Matricula"
-                value = {matricula}
-                setValue = {setMatricula}
+                placeholder = "Introduzca su Correo"
+                value = {email}
+                setValue = {setEmail}
                 keyboardType = 'number-pad'
                 />
             
