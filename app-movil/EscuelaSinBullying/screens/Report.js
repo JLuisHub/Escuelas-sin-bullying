@@ -13,7 +13,7 @@ function Report ({ route, navigation }) {
         datos = {"matri": matricula, "fecha": now, "descri": descripcion}
         console.log(matricula)
         console.log(descripcion)
-        console.warn("Se guardó el reporte")
+        console.log("Se guardó el reporte")
     }
     
 

@@ -10,7 +10,7 @@ class EstudianteAPIController extends Controller
 
     public function showAll($clave)
     {
-        $datos = Estudiantes::all() -> where('clave',$clave);
+        $datos = Estudiantes::where('clave',$clave) -> get();
         return response() -> json($datos);
     }
 }
