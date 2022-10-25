@@ -1,0 +1,123 @@
+
+
+<?php $__env->startSection('title'); ?> Docentes <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('Head'); ?>
+<?php echo e(__('Docentes')); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('enlaces'); ?>
+<a href="<?php echo e(url('docentes')); ?>" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M4 4h6v8h-6z"></path>
+        <path d="M4 16h6v4h-6z"></path>
+        <path d="M14 12h6v8h-6z"></path>
+        <path d="M14 4h6v4h-6z"></path>
+    </svg>Volver al tablero          
+</a>
+<?php $__env->stopSection(); ?>
+
+
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div >
+
+            <?php if( session('errors') ): ?>
+                <div class="alert alert-warning " role="alert">
+                    <strong>  <?php echo e(session('errors')->first('error')); ?> 
+                    </strong>
+                </div>
+            <?php endif; ?>
+
+            <div class="card" style="min-width: 280px ">
+                <div class="card-header">
+                    <?php echo e(__('Cargar base de datos por archivo CSV')); ?>
+
+                </div>
+                <div class="card-body card-header">
+                    <?php if(session('status')): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo e(session('status')); ?>
+
+                        </div>
+                    <?php endif; ?>
+                    <div class="card-body">
+                        <div class="form-group mb-3 row" >
+                            <label class="form-label" style="color:#001640; font-size:20px">1.- Crea un archivo cvs con la siguiente estructura:</label>
+                        </div>
+                    </div>
+                    <div class="page-body">
+                        <div class="container-xl">
+                            <div class="row row-cards">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-vcenter card-table">
+                                            <thead>
+                                                <tr>
+                                                <th>Matrícula</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido paterno</th>
+                                                <th>Apellido materno</th>
+                                                <th>Contraseña</th>
+                                                <th>Correo electronico</th>
+                                                <th>Clave de la escuela</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <td >39201458</td>
+                                                <td>Jose  </td>
+                                                <td > Salazar</td>
+                                                <td> Jimenez</td>
+                                                <td>Temporal </td>
+                                                <td>ejemplo@gmail.com </td>
+                                                <td>123456 </td>
+                                                </tr>
+
+                                                <tr>
+                                                <td >39201499</td>
+                                                <td>Juan  </td>
+                                                <td > Dominguez</td>
+                                                <td> Yahoiu</td>
+                                                <td>Temporal </td>
+                                                <td>ejemplo2@gmail.com </td>
+                                                <td>123456 </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form  action="<?php echo e(url('/docentes' )); ?>" method="POST" enctype="multipart/form-data" >
+                        <?php echo e(csrf_field()); ?>          
+                        <div class="card-body">
+                                <div class="form-group mb-3 row" >
+                                    <label class="col-3 col-form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo</label>
+                                    <input class="form-control form-control-rounded mb-2" type="file" name="file" style="width: 350px">
+                                </div>
+                                <center>
+                                <div class="form-footer">
+                                    <hr>
+                                    <button type="submit" class="btn btn-primary" style="background-color:#001640; border-radius: 30px; font-size:20px; width: 180px">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                                </center>
+                                
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\juann\Downloads\TSP-Escuelas-sin-bullying\aplicacion-web\bullying\resources\views/docentes/reg_docentes.blade.php ENDPATH**/ ?>
