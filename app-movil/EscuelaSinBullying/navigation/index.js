@@ -8,6 +8,7 @@ import SignInScreen from '../screens/SignInScreen'
 import ProfessorsHome from '../screens/ProfessorsHome'
 import ReportsRecord from '../screens/ReportsRecord'
 import Report from '../screens/Report'
+import Summon from '../screens/Summon'
 import LoadingScreen from '../screens/LoadingScreen'
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,9 @@ const Navigation = () => {
 
         <Stack.Screen name='Report' component={Report} 
           options={HeaderStack("Reporte a alumno")} />
+
+        <Stack.Screen name='Summon' component={Summon}
+          options={HeaderStack("Citar a Tutor legal de alumno")} />
 
         <Stack.Screen name='Loading' component={LoadingScreen} />
 
