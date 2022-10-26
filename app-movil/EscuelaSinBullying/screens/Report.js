@@ -3,7 +3,8 @@ import React, {useState} from 'react'
 import CustomButton from '../components/CustomButton'
 
 function Report ({ route, navigation }) {
-    const { nombre, matricula } = route.params
+    // id, nombre y matricula del alumno pasada por parametros
+    const { id, nombre, matricula } = route.params
     const [descripcion, setDescripcion] = useState('')
 
     const now = new Date()

@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\DB;
 class ReporteAPIController extends Controller
 {
     public function showEstudiante($id) {
-        $datos = Reporte::all() -> where('id_estudiante',$id);
+        $datos = Reporte::where('id_estudiante',$id) -> get();
+
         return response() -> json($datos);
     }
 
@@ -48,9 +49,9 @@ class ReporteAPIController extends Controller
     {
         $reporte = Reporte::destroy($id_reporte=($request->id_reporte));
         if($reporte == 0){
-            return "Hubo un error al eliminar el reporte, intente más tarde";
+            return response() -> json("Hubo un error al eliminar el reporte, intente más tarde");
         }else{
-            return "Eliminado con éxito";
+            return response() -> json("Eliminado con éxito");
         }
     }
 
