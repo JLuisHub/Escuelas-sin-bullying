@@ -2,43 +2,48 @@
 
 if( !function_exists('validar_estructura_del_archivo')){
     
-    function validar_estructura_del_archivo($renglones){
+    function validar_estructura_del_archivo($renglones,$numero_de_filas){
+
         $mensaje_de_error = "";
 
         $contiene_cols_vacias = false;
         $es_la_clave_congruente = true;
-        $contiene_mas_de_7_cols = false;
 
         $numero_renglon = 2; // Esta variable nos ayuda a detectar en que renglón del archivo CSV se dio un error.
         $clave_erronea = "";
 
-        // Recorre cada una de las filas del archivo CSV
-        foreach( $renglones as $renglon_actual ){
 
+        // Recorre cada una de las filas del archivo CSV
+        for( $pos_renglon=0; $pos_renglon<$numero_de_filas-1; $pos_renglon++ ){
+
+            $renglon_actual = $renglones[$pos_renglon];
             // Divido el renglón acutal o fila por ,
             // Renglon dividido contiene el contenido en texto de cada una de las columnas del archivo CSV
             $renglon_dividido = explode(",",$renglon_actual);
             $numero_cols = 0;
 
-            //  Verificamos que las columnas no esten vacias.
-            foreach( $renglon_dividido as $parte_del_renglon ){
-                if( empty( rtrim( ltrim($parte_del_renglon) ) ) ){ // Se encontró una columna vacía
-                    $contiene_cols_vacias = true;
-                    break;
-                }
-                $numero_cols = $numero_cols + 1;
-            }
-
-            // Recordemos que cada fila el archivo CSV debe de tener 7 columnas
-            if( $contiene_cols_vacias || count($renglon_dividido ) < 7){
+            if( count($renglon_dividido) < 7){
                 $contiene_cols_vacias = true;
                 break;
             }
 
-            if($numero_cols > 7){
-                $contiene_mas_de_7_cols = true;
+            //  Verificamos que las columnas no esten vacias.
+            foreach( $renglon_dividido as $parte_del_renglon ){
+                $numero_cols = $numero_cols + 1;
+                if($numero_cols==7){
+                    break;
+                }
+                if( empty( rtrim( ltrim($parte_del_renglon) ) ) ){ // Se encontró una columna vacía
+                    $contiene_cols_vacias = true;
+                    break;
+                }
+            }
+            // Recordemos que cada fila el archivo CSV debe de tener 7 columnas
+            if( $contiene_cols_vacias ){
+                $contiene_cols_vacias = true;
                 break;
             }
+
 
             //  Valida que la clave del director sea igual que la clave de los alumnos del archivo CSV
             //  Ejemplo: Supongamos que la clave del director es: 1324JFB123 y en el archivo CSV tenemos
@@ -51,10 +56,6 @@ if( !function_exists('validar_estructura_del_archivo')){
             }
 
             $numero_renglon = $numero_renglon + 1;
-        }
-
-        if( $contiene_mas_de_7_cols ){
-            $mensaje_de_error = 'En la fila ' . $numero_renglon . ' el archivo CSV contiene más de 7 columnas.';
         }
 
         if( $contiene_cols_vacias ){

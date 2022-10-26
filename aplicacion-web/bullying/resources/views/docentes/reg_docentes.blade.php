@@ -96,10 +96,15 @@
                     <form  action="{{ url('/docentes' )}}" method="POST" enctype="multipart/form-data" >
                         {{ csrf_field() }}          
                         <div class="card-body">
-                                <div class="form-group mb-3 row" >
-                                    <label class="col-3 col-form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo</label>
-                                    <input class="form-control form-control-rounded mb-2" type="file" name="file" style="width: 350px">
-                                </div>
+                            <div class="form-group mb-3 row" >
+                                <label class="form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo</label>
+                                
+                                <input class="form-control form-control-rounded mb-2" type="file" name="file" style="width: 350px">
+                                <label class="form-label" style="color:#001640; font-size:20px">3.- Ingrese el número de renglones que contiene el archivo</label>
+                                <input type="number" name="numero_filas" class="number_filas " style="width: 350px; height:40px; border: 1px solid rgb(199, 185, 185); border-radius:10px;" placeholder="Numero de columnas" >
+                        
+                            </div>
+                                
                                 <center>
                                 <div class="form-footer">
                                     <hr>

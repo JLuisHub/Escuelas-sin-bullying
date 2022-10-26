@@ -61,6 +61,7 @@ class DocentesController extends Controller
         //  Valida que el archivo que selecionó el directivo sea un archivo CSV.
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:csv,txt',
+            'numero_filas' => 'required'
         ]);
 
         //  Si el archivo selecionado no es CSV se mostrará un mensaje de error.
@@ -71,10 +72,17 @@ class DocentesController extends Controller
             ]);
         }
 
+        if( $request->numero_filas <= 0 || $request->numero_filas > 5000 ){
+            return back()->withErrors([
+                'error'=>
+                'El numero de filas es negativo o es demasiado grande'
+            ]);
+        }
+
         $file = file($request->file->getRealPath()); 
         $data = array_slice($file,1); // Nos permite eliminar la primera linea del archivo
 
-        $mensaje_de_error = validar_estructura_del_archivo($data);
+        $mensaje_de_error = validar_estructura_del_archivo($data,$request->numero_filas);
 
         if( !empty($mensaje_de_error) ){ // El archivo CSV tiene algun error en su estructura
             return back()->withErrors([
@@ -82,11 +90,9 @@ class DocentesController extends Controller
             ]);
         }
 
-        $parts =(array_chunk($data,1000)); 
-        foreach($parts as $index=>$part){
-            $fileName = resource_path('doc/'.date('y-m-d-H-i-s').$index.'.csv');
-            file_put_contents($fileName,$part);
-        }
+        $part = (array_chunk($data,$request->numero_filas-1));
+        $fileName = resource_path('doc/'.date('y-m-d-H-i-s').'.csv');
+        file_put_contents($fileName,$part[0]);
 
         return redirect('docentes');
     }
