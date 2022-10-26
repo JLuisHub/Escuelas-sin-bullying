@@ -5,7 +5,6 @@ use App\Models\Reporte;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
-use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +13,7 @@ class ReporteAPIController extends Controller
 {
     public function store(Request $request)
     {
-        // Validamos que el estudiante reportado tenga asociados a almenos 1 tutor legal. 
+        // Validamos que el estudiante reportado tenga asociados a al menos 1 tutor legal. 
         $tutores_legales_encontrados = DB::table('estudiantes_tutores_legales')->where('id_estudiante', $request->id_estudiante)->get();
         
         if( empty($tutores_legales_encontrados[0]) ){
@@ -48,7 +47,10 @@ class ReporteAPIController extends Controller
 
     public function destroy(Request $request,Reporte $reporte)
     {
+        // Se obtiene obtine una respuesta al intentar eliminar un reporte
         $reporte = Reporte::destroy($id_reporte=($request->id_reporte));
+        
+        // Se compara el resultado obtenido
         if($reporte == 0){
             return "Hubo un error al eliminar el reporte, intente más tarde";
         }else{
