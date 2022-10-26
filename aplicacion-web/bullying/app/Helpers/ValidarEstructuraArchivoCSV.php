@@ -4,6 +4,10 @@ if( !function_exists('validar_estructura_del_archivo')){
     
     function validar_estructura_del_archivo($renglones,$numero_de_filas){
 
+        if( empty($renglones) ){ // No hay renglones por agregar.
+            return "El archivo proporsionado no contiene datos.";
+        }
+
         $mensaje_de_error = "";
 
         $contiene_cols_vacias = false;
@@ -30,7 +34,7 @@ if( !function_exists('validar_estructura_del_archivo')){
             //  Verificamos que las columnas no esten vacias.
             foreach( $renglon_dividido as $parte_del_renglon ){
                 $numero_cols = $numero_cols + 1;
-                if($numero_cols==7){
+                if($numero_cols==7){ // Solo se leen 7 columnas
                     break;
                 }
                 if( empty( rtrim( ltrim($parte_del_renglon) ) ) ){ // Se encontró una columna vacía
