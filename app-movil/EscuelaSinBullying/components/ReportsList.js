@@ -1,47 +1,91 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import ReportCard from '../components/ReportCard'
-import {useNavigation} from '@react-navigation/native'
+import { useNavigation, useFocusEffect} from '@react-navigation/native'
+import { URL_BASE } from '@env'
 
 class ReportsList extends Component {
   constructor(props) {
     super(props)
+    this.url = 'http://'+ URL_BASE +'/api/reportes/estudiante/' + this.props.id
+    //this.interval = setInterval(() => this.checkData(), 1000);
+    this.refreshList = this.refreshList.bind(this)
+    this.checkData = this.checkData.bind(this)
   
     this.state = {
-       data: []
+       data: [],
+       isRefreshing: false,
     }
     //Este array en realidad va cargar los reportes traidos por una query
     this.arrayNew = [];
+    this.arrayNewTemp = [];
     this.getData()
   }
 
   getData = () => {
+    fetch(this.url, {
+        method: 'GET'
+        //Request Type
+    })
+    .then((response) => response.json())
+    //If response is in json then in success
+    .then((response) => {
+        //Success
+        //const arrayTemp = []
+        response.forEach(element => {
+            tempSet = {
+                id: element['id'],
+                description: element['descripcion'],
+                date: element['fecha'],
+            }
+            this.arrayNew.push(tempSet)
+            //console.log(this.arrayNew)
+        })
+        this.setState({data: this.arrayNew})    
+    })
+    //If response is not in json then in error
+    .catch((error) => {
+        //Error 
+        console.error(error)
+    })
+  }
 
-      fetch('http://192.168.1.117:8000/api/reportes/estudiante/' + this.props.id, {
-          method: 'GET'
-          //Request Type
-      })
-      .then((response) => response.json())
-      //If response is in json then in success
-      .then((response) => {
-          //Success
-          //const arrayTemp = []
-          response.forEach(element => {
-              tempSet = {
-                  id: element['id'],
-                  description: element['descripcion'],
-                  date: element['fecha'],
-              }
-              this.arrayNew.push(tempSet)
-              //console.log(this.arrayNew)
-          })
-          this.setState({data: this.arrayNew})
-      })
-      //If response is not in json then in error
-      .catch((error) => {
-          //Error 
-          console.error(error)
-      })
+  checkData = () => {
+    fetch(this.url, {
+      method: 'GET'
+      //Request Type
+    })
+    .then((response) => response.json())
+    //If response is in json then in success
+    .then((response) => {
+        //Success
+        //const arrayTemp = []
+        response.forEach(element => {
+            tempSet = {
+                id: element['id'],
+                description: element['descripcion'],
+                date: element['fecha'],
+            }
+            this.arrayNewTemp.push(tempSet)
+            //console.log(this.arrayNew)
+        })
+        if (this.arrayNew.length != this.arrayNewTemp.length) {
+          this.arrayNew = this.arrayNewTemp
+          this.arrayNewTemp = []
+        }
+        this.setState({data: this.arrayNew})
+    })
+    //If response is not in json then in error
+    .catch((error) => {
+        //Error 
+        console.error(error)
+    })
+  }
+
+  refreshList() {
+    this.setState({isRefreshing: true})
+    
+    this.setState({isRefreshing: false})
   }
 
   renderSeparator = () => {
@@ -69,15 +113,17 @@ class ReportsList extends Component {
   }
 
   render() {
+    
     return (
       <View
         style={styles.containerView}>
           <FlatList
               style = {styles.list_cont}
               data={this.state.data}
-              refreshing
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.checkData}
               renderItem={({ item }) => (
-                  <ReportCard id = {item.id} desc = {item.description} date = {item.date} />
+                  <ReportCard id = {item.id} desc = {item.description} date = {item.date} refresh={this.checkData} />
               )}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={this.renderSeparator}
@@ -94,13 +140,14 @@ const styles = StyleSheet.create({
     width: '98%',
     alignSelf: 'center',
     justifyContent: 'center',
+    height: '90%'
   },
 
   list_cont: {
     maxHeight: '100%'
   },
   headerInfoCont: {
-    marginBottom: 10,
+    marginBottom: 5,
     padding: 10,
   },
 

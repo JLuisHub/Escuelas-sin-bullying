@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, TextInput, ListItem, ScrollView, StyleSheet } from 'react-native';
 import StudentCard from './StudentCard';
+import {URL_BASE} from "@env";
 
 class SearchFunction extends Component {
   constructor(props) {
     super(props);
     this.arrayNew = []
+    this.url = "http://"+ URL_BASE +"/api/estudiantes/"
     this.getData()
 
     this.state = {
@@ -14,9 +16,9 @@ class SearchFunction extends Component {
     };
   }
 
-  getData = () => {
-    
-    fetch('http://192.168.1.117:8000/api/estudiantes/' + this.props.clave, {
+  getData () {
+    //console.log(this.url + this.props.clave)
+    fetch(this.url + this.props.clave, {
         method: 'GET'
         //Request Type
     })

@@ -1,11 +1,31 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import CustomButton from './CustomButton'
+import { useNavigation } from '@react-navigation/native'
+import { URL_BASE } from '@env'
 
-const ReportCard = ({id, desc, date}) => {
+const ReportCard = ( {id, desc, date, matricula, nombre, refresh} ) => {
+
+    const navigation = useNavigation()
 
     const onDeletePress = () => {
-        console.log("Se elimina el reporte con id: " + id)
+        fetch('http://'+ URL_BASE +'/api/reportes/' + id, {
+          method: 'DELETE'
+          //Request Type
+        })
+        .then((response) => response.json())
+        //If response is in json then in success
+        .then((response) => {
+            //Success
+            console.warn(response)
+            })
+        //If response is not in json then in error
+        .catch((error) => {
+            //Error 
+            console.error(error)
+        })
+
+        {refresh()}
     }
     
     return (
