@@ -6,17 +6,13 @@ import CustomButton from '../components/CustomButton'
 
 import {useNavigation} from '@react-navigation/native'
 
-const SignInScreen = () => {
+const AddTutorado = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const accesos = {'12345': 'contra123',
-                    '12145': 'contra124',
-                    '52345': 'contra1235'}
-
     const navigation = useNavigation()
 
-    const onSignInPressed = () => {
+    const onSavePress = () => {
         /*if (accesos[email]) {
             if (accesos[email] == password) {
                 console.info("Sesion iniciada")
@@ -97,16 +93,24 @@ const SignInScreen = () => {
     <View>
         <View style = {[styles.login_form_cont]}>
 
-            <Text style = {[styles.login_input_name]}>Correo</Text>
+            <Text style = {[styles.login_input_name]}>Clave de la escuela</Text>
             <CustomInput 
-                placeholder = "Introduzca su Correo"
+                placeholder = "Introduzca la clave"
                 value = {email}
                 setValue = {setEmail}
                 />
             
-            <Text style = {[styles.login_input_name]}>Contraseña</Text>
+            <Text style = {[styles.login_input_name]}>Matricula</Text>
             <CustomInput 
-                placeholder = "Contraseña"
+                placeholder = "Introduzca la matricula"
+                value = {password}
+                setValue = {setPassword}
+                secureTextEntry
+                />
+
+            <Text style = {[styles.login_input_name]}>Fecha de nacimiento sin guiones</Text>
+            <CustomInput 
+                placeholder = "ejemplo 22-10-22 sería 221022"
                 value = {password}
                 setValue = {setPassword}
                 secureTextEntry
@@ -114,8 +118,8 @@ const SignInScreen = () => {
 
             <View style = {[styles.CustomButtonCont]}>
                 <CustomButton
-                    text = 'Iniciar Sesión'
-                    onPress = {onSignInPressed}
+                    text = 'Agregar'
+                    onPress = {onSavePress}
                     />
             </View>
         </View>
@@ -147,4 +151,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SignInScreen
+export default AddTutorado

@@ -10,6 +10,9 @@ import ReportsRecord from '../screens/ReportsRecord'
 import Report from '../screens/Report'
 import Summon from '../screens/Summon'
 import LoadingScreen from '../screens/LoadingScreen'
+import TutorsHome from '../screens/TutorsHome'
+import Notifications from '../screens/Notifications'
+import AddTutorado from '../screens/AddTutorado'
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +20,18 @@ const Navigation = () => {
   return (
     <NavigationContainer >
       <Stack.Navigator screenOptions={{headerShown: true}}>
+        <Stack.Screen name="TutorsHome" component={TutorsHome} 
+          options={HeaderStack("Escuela Sin Bullying")} />
         
-        <Stack.Screen name="SignIn" component={SignInScreen} options={HeaderStack("Escuela Sin Bullying")} />
+        <Stack.Screen name="SignIn" component={SignInScreen} 
+          options={HeaderStack("Escuela Sin Bullying")} />
+
+
+        <Stack.Screen name="Notifications" component={Notifications} 
+          options={HeaderStack("Notificaciones")} />
+
+        <Stack.Screen name="AddTutorado" component={AddTutorado} 
+          options={HeaderStack("Agregar a tutorado")} />
         
         <Stack.Screen name='ProfessorsHome' component={ProfessorsHome} 
           options={HeaderStack("Lista de Alumnos")}/>
