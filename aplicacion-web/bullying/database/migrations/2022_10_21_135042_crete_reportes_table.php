@@ -15,9 +15,8 @@ class CreteReportesTable extends Migration
     {
         Schema::create('reportes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_docente')->auto_increment;
+            $table->unsignedBigInteger('id_docente');
             $table->unsignedBigInteger('id_estudiante');
-            $table->unsignedBigInteger('id_tutor_legal');
             $table->string('descripcion');
             $table->string('fecha');
             $table->foreign('id_docente')->references('id')->on('docentes');

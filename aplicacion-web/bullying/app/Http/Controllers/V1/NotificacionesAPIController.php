@@ -7,27 +7,28 @@ use Illuminate\Support\Facades\DB;
 
 class NotificacionesAPIController extends Controller
 {
-    //
     public function getNotificacionesReportes($id_tutor_legal){
-        //Extrae todos los estudiantes relacionados con él tutor legal.
-        $tutores_estudiantes = DB::table('estudiantes_tutores_legales')->where('id_tutor_legal',$id_tutor_legal)->get(); 
-        $tam = count($tutores_estudiantes)-1;
+        //Extrae todos los estudiantes relacionados con el tutor legal.
+        $tutoresEstudiantes = DB::table('estudiantes_tutores_legales')->where('id_tutor_legal',$id_tutor_legal)->get(); 
+        $numeroDeEstudiantes = count($tutoresEstudiantes)-1;
         $notificaciones = array();
         $tamArrey=0;
-        for($i=$tam; $i>=0; $i--){
+
+        for($posicionEstudiante=$numeroDeEstudiantes; $posicionEstudiante>=0; $posicionEstudiante--){
             //Extrae los reportes de ese tutor
-            $reportes =DB::table('reportes')->where('id_estudiante',$tutores_estudiantes[$i]->id_estudiante)->get();
-            $tam2 = count($reportes);
-            for($j=0; $j<$tam2; $j++){
+            $reportes = DB::table('reportes')->where('id_estudiante',$tutoresEstudiantes[$posicionEstudiante]->id_estudiante)->get();
+            $numeroReportesEstudianteActual = count($reportes);
+
+            for($posReporteActual=0; $posReporteActual<$numeroReportesEstudianteActual; $posReporteActual++){
                 //Nombre del estudiante
-                $nombreEstu = DB::table('estudiantes')->where('id',$reportes[$j]->id_estudiante)->get();
+                $nombreEstu = DB::table('estudiantes')->where('id',$reportes[$posReporteActual]->id_estudiante)->get();
                 //Nombre del docente
-                $nombreDoc = DB::table('docentes')->where('id',$reportes[$j]->id_docente)->get();
+                $nombreDoc = DB::table('docentes')->where('id',$reportes[$posReporteActual]->id_docente)->get();
                 $asunto = "reporte";
-                $tamArrey+=$j;
+                $tamArrey+=$posReporteActual;
                 //Genera la notificación del reporte
                 $notificaciones[$tamArrey] = array(
-                    "id"=> $reportes[$j]->id ,
+                    "id"=> $reportes[$posReporteActual]->id ,
                     "asunto"=> $asunto ,
                     "descripcion"=>$nombreEstu[0]->Nombre." ".$nombreEstu[0]->Apaterno." ".$nombreEstu[0]->Amaterno.
                     " tiene un reporte del profesor: ".$nombreDoc[0]->Nombre." ".$nombreDoc[0]->Apaterno." ".$nombreDoc[0]->Amaterno,   
@@ -40,22 +41,23 @@ class NotificacionesAPIController extends Controller
 
     public function getNotificacionesCitatorio($id_tutor_legal){
         //Extrae todos los alumnos vinculados a él
-        $tutores_estudiantes = DB::table('estudiantes_tutores_legales')->where('id_tutor_legal',$id_tutor_legal)->get(); 
-        $tam = count($tutores_estudiantes)-1;
+        $tutoresEstudiantes = DB::table('estudiantes_tutores_legales')->where('id_tutor_legal',$id_tutor_legal)->get(); 
+        $numeroDeEstudiantes = count($tutoresEstudiantes)-1;
         $notificaciones = array();
         $tamArrey=0;
-        for($i=0; $i<$tam; $i++){
+
+        for($posEstudiante=0; $posEstudiante<$numeroDeEstudiantes; $posEstudiante++){
             //Extrae todos los citatorios
-            $citatorios =DB::table('citatorios')->where('id_estudiante',$tutores_estudiantes[$i]->id_estudiante)->get();
-            $tam2 = count($citatorios);
-            for($j=0; $j<$tam2; $j++){
+            $citatorios =DB::table('citatorios')->where('id_estudiante',$tutoresEstudiantes[$posEstudiante]->id_estudiante)->get();
+            $numeroCitatorios = count($citatorios);
+            for($posCitatorio=0; $posCitatorio<$numeroCitatorios; $posCitatorio++){
                 //Nombre del docente
-                $nombreDoc = DB::table('docentes')->where('id',$citatorios[$j]->id_docente)->get();
+                $nombreDoc = DB::table('docentes')->where('id',$citatorios[$posCitatorio]->id_docente)->get();
                 $asunto = "citatorio";
-                $tamArrey+=$j;
+                $tamArrey+=$posCitatorio;
                 //Genera la notificación del citatorio
                 $notificaciones[$tamArrey] = array(
-                    "id"=> $citatorios[$j]->id ,
+                    "id"=> $citatorios[$posCitatorio]->id ,
                     "asunto"=> $asunto ,
                     "descripcion"=>"Tienes un citatorio del profesor: ".$nombreDoc[0]->Nombre." ".$nombreDoc[0]->Apaterno." ".$nombreDoc[0]->Amaterno,   
                 );
