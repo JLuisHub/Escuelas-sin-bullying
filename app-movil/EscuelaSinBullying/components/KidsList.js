@@ -16,9 +16,9 @@ class KidsList extends Component {
        isRefreshing: false,
     }
     //Este array en realidad va cargar los reportes traidos por una query
-    this.arrayNew = [];
+    this.arrayNew = [{nombre: "Pepito"}, {nombre: "Maria"}, {nombre: "Jose"}, {nombre: "Martha"}];
     this.arrayNewTemp = [];
-    this.getData()
+    //this.getData()
   }
 
   getData = () => {
@@ -66,7 +66,8 @@ class KidsList extends Component {
         style={styles.containerView}>
           <FlatList
               style = {styles.list_cont}
-              data={this.state.data}
+              //data={this.state.data}
+              data={this.arrayNew}
               //refreshing={this.state.isRefreshing}
               //onRefresh={this.checkData}
               renderItem={({ item }) => (

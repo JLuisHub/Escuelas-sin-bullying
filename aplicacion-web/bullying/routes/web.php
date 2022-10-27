@@ -32,3 +32,4 @@ Route::resource('estudiantes','App\Http\Controllers\EstudiantesController');
 Route::get('/tutor_legal/register_view', function(){
     return view('TutorLegal.registro');
 });
+Route::resource('estudiantes','App\Http\Controllers\EstudiantesController');
