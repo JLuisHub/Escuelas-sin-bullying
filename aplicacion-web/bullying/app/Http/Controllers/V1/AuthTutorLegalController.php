@@ -22,18 +22,26 @@ class AuthTutorLegalController extends Controller
     public function register(Request $request)
     {
         //  Indicamos que solo queremos recibir email y password de la request
-        $data = $request->only('email', 'nombre','aPaterno','aMaterno','password');
+        $data = $request->only('email', 'nombre','aPaterno','aMaterno','password','passwordConfirm');
 
         //  Realizamos las validaciones
         //  Se valida que el email no haya sido introducido anteriormente por un docente o directivo.
         $validator = Validator::make($data, [
+            'nombre' => 'required',
+            'aPaterno' => 'required',
+            'aMaterno' => 'required',
             'email' => 'required|email|unique:tutores_legales|unique:users|unique:docentes',
             'password' => 'required|string|min:6|max:50',
+            'passwordConfirm' => 'required|string|min:6|max:50',
         ]);
 
         //  Devolvemos un error si fallan las validaciones
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 400);
+            return response()->json(['error' => $validator->messages(), 'status' => Response::HTTP_BAD_REQUEST]);
+        }
+
+        if( $request->password != $request->passwordConfirm ){
+            return response()->json(['error' => 'Las contraseñas proporcionadas no son iguales.','status' => Response::HTTP_BAD_REQUEST]);
         }
 
         try{
@@ -47,7 +55,7 @@ class AuthTutorLegalController extends Controller
             ]);
 
         } catch (Exeption $e){
-            return response()->json(['error' => 'Ha ocurrido un error al momento de registrar la cuenta.'], 500);
+            return response()->json(['error' => 'Ha ocurrido un error al momento de registrar la cuenta.','status' => 500]);
         }
         
         //Nos guardamos el usuario y la contraseña para realizar la petición de token a JWTAuth
@@ -55,10 +63,9 @@ class AuthTutorLegalController extends Controller
 
         //Devolvemos la respuesta con el token del usuario
         return response()->json([
-            'message' => 'User created',
-            'token' => JWTAuth::fromUser($user),
-            'user' => $user
-        ], Response::HTTP_OK);
+            'message' => 'La cuenta se ha registrado exitosamente.',
+            'status' => Response::HTTP_OK
+        ]);
     }
 
     public function authenticate(Request $request)
