@@ -82,7 +82,7 @@ class DocentesController extends Controller
         $file = file($request->file->getRealPath()); 
         $data = array_slice($file,1); // Nos permite eliminar la primera linea del archivo
 
-        $mensaje_de_error = validar_estructura_del_archivo($data,$request->numero_filas);
+        $mensaje_de_error = validar_estructura_del_archivo($data,$request->numero_filas, "docentes");
 
         if( !empty($mensaje_de_error) ){ // El archivo CSV tiene algun error en su estructura
             return back()->withErrors([
