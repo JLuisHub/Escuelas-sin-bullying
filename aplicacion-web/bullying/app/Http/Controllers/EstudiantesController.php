@@ -69,14 +69,14 @@ class EstudiantesController extends Controller
         if ($validator->fails()) {
             return back()->withErrors([
                 'error'=>
-                'El archivo seleccionado no es un archivo con extensión CSV. Por favor, seleciona un archivo nuevamente.'
+                'El archivo seleccionado no es un archivo con extensión CSV. Por favor, seleccione un archivo nuevamente.'
             ]);
         }
 
         if( $request->numero_filas <= 0 || $request->numero_filas > 5000 ){
             return back()->withErrors([
                 'error'=>
-                'El numero de filas es negativo o es demasiado grande'
+                'El número de filas es negativo o es demasiado grande.'
             ]);
         }
 

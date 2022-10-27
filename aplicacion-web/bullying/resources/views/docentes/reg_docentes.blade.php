@@ -7,7 +7,7 @@
 @endsection
 
 @section('enlaces')
-<a href="{{url('docentes')}}" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+<a href="{{url('home')}}" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <path d="M4 4h6v8h-6z"></path>
@@ -62,7 +62,7 @@
                                                 <th>Apellido paterno</th>
                                                 <th>Apellido materno</th>
                                                 <th>Contraseña</th>
-                                                <th>Correo electronico</th>
+                                                <th>Correo electrónico</th>
                                                 <th>Clave de la escuela</th>
                                                 </tr>
                                             </thead>
@@ -97,10 +97,10 @@
                         {{ csrf_field() }}          
                         <div class="card-body">
                             <div class="form-group mb-3 row" >
-                                <label class="form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo</label>
+                                <label class="form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo:</label>
                                 
                                 <input class="form-control form-control-rounded mb-2" type="file" name="file" style="width: 350px">
-                                <label class="form-label" style="color:#001640; font-size:20px">3.- Ingrese el número de renglones que contiene el archivo</label>
+                                <label class="form-label" style="color:#001640; font-size:20px">3.- Ingrese el número de renglones que contiene el archivo:</label>
                                 <input type="number" name="numero_filas" class="number_filas " style="width: 350px; height:40px; border: 1px solid rgb(199, 185, 185); border-radius:10px;" placeholder="Numero de columnas" >
                         
                             </div>
