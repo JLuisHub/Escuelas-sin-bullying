@@ -3,7 +3,7 @@
 ## Repositorio de la aplicacion-web y la aplicacion-movil.
 
 #### Integrantes:
-+ Roverto Carlo Tovar Varela
++ Roberto Carlos Tovar Varela
 + Jose Luis Vargas Ibarra
 + Juan Francisco Navarro Ambriz
 + Reyna Esmeralda Sánchez Rodríguez
