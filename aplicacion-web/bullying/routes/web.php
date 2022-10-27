@@ -27,3 +27,8 @@ Route::get('/verAlumnos', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('docentes','App\Http\Controllers\DocentesController');
 Route::resource('estudiantes','App\Http\Controllers\EstudiantesController');
+
+// Ruta para mostrar la pagina de registro al tutor legal
+Route::get('/tutor_legal/register_view', function(){
+    return view('TutorLegal.registro');
+});
