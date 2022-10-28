@@ -21,8 +21,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div >
-
+        <div>
             @if ( session('errors') )
                 <div class="alert alert-warning " role="alert">
                     <strong>  {{ session('errors')->first('error') }} 
@@ -97,7 +96,7 @@
                                 <label class="form-label" style="color:#001640; font-size:20px">2.- Seleccione el archivo:</label><br>
                                 
                                 <input class="form-control form-control-rounded mb-2" type="file" name="file" style="width: 350px"> <br>
-                                <label class="form-label" style="color:#001640; font-size:20px">3.- Ingrese el número de renglones que contiene el archivo:</label>
+                                <label class="form-label" style="color:#001640; font-size:20px">3.- Ingrese el número de renglones que contiene el archivo (incluyendo el encabezado):</label>
                                 <input type="number" name="numero_filas" class="number_filas " style="width: 350px; height:40px; border: 1px solid rgb(199, 185, 185); border-radius:10px;" placeholder="Numero de columnas" >
                         
                             </div>

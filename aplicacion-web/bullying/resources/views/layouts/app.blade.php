@@ -23,9 +23,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-blue shadow-sm">
             <div class="container">
-                <a class="navbar-brand" >
+                <p style="color:white; font-size:20px; padding-top: 10px" >
                     {{ __('Escuelas sin bullying') }}
-                </a>
+                </p>
                 <button class="navbar-toggler white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
