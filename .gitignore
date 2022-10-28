@@ -1,6 +1,6 @@
 # OSX
 #
-app-movil/EscuelaSinBullying/.DS_Store
+/app-movil/EscuelaSinBullying/.DS_Store
 
 # Xcode
 #
@@ -34,9 +34,9 @@ local.properties
 
 # node.js
 #
-app-movil/EscuelaSinBullying/node_modules/
-app-movil/EscuelaSinBullying/npm-debug.log
-app-movil/EscuelaSinBullying/yarn-error.log
+/app-movil/EscuelaSinBullying/node_modules/
+/app-movil/EscuelaSinBullying/npm-debug.log
+/app-movil/EscuelaSinBullying/yarn-error.log
 
 # BUCK
 buck-out/
@@ -63,3 +63,18 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
+*.code-workspace
+
+#Laravel
+/aplicacion-web/bullying/node_modules
+/aplicacion-web/bullying/public/hot
+/aplicacion-web/bullying/storage/*.key
+/aplicacion-web/bullying/.env.backup
+/aplicacion-web/bullying/.phpunit.result.cache
+/aplicacion-web/bullying/docker-compose.override.yml
+/aplicacion-web/bullying/Homestead.json
+/aplicacion-web/bullying/Homestead.yaml
+/aplicacion-web/bullying/npm-debug.log
+/aplicacion-web/bullying/yarn-error.log
+/aplicacion-web/bullying/.idea
+/aplicacion-web/bullying/.vscode
