@@ -1,11 +1,12 @@
 <?php 
+use Illuminate\Support\Facades\DB;
 
 if( !function_exists('validar_estructura_del_archivo')){
     
-    function validar_estructura_del_archivo($renglones,$numero_de_filas){
+    function validar_estructura_del_archivo($renglones,$numero_de_filas, $tipo){
 
         if( empty($renglones) ){ // No hay renglones por agregar.
-            return "El archivo proporsionado no contiene datos.";
+            return "El archivo proporcionado no contiene datos.";
         }
 
         $mensaje_de_error = "";
@@ -25,6 +26,19 @@ if( !function_exists('validar_estructura_del_archivo')){
             // Renglon dividido contiene el contenido en texto de cada una de las columnas del archivo CSV
             $renglon_dividido = explode(",",$renglon_actual);
             $numero_cols = 0;
+
+            $datos_existentes = "";
+            $docente_existente_correo = "";
+            if($tipo == "docentes"){
+                $datos_existentes = DB::table('docentes')->where('Matricula',$renglon_dividido[0])->where('clave',Auth::user()->clave)->get();
+                $docente_existente_correo = DB::table('docentes')->where('email',$renglon_dividido[5])->get();
+            }else{
+                $datos_existentes = DB::table('estudiantes')->where('Matricula',$renglon_dividido[0])->where('clave',Auth::user()->clave)->get();
+            }
+            if(!empty($datos_existentes[0]) or !empty($docente_existente_correo[0])){
+                $mensaje_de_error = "Ya se encuentran registros existentes. Compruebe que nadie este registrado e intente nuevamente.";
+                break;
+            }
 
             if( count($renglon_dividido) < 7){
                 $contiene_cols_vacias = true;
@@ -68,11 +82,11 @@ if( !function_exists('validar_estructura_del_archivo')){
 
         if( $es_la_clave_congruente == false ){
             if( empty(trim($clave_erronea)) ){
-                $clave_erronea = "Columna vacía";
+                $clave_erronea = "Columna vacía.";
             }
 
-            $mensaje_de_error = 'En la fila ' . $numero_renglon . ' del archivo CSV la clave de institución 
-            no es congruente con la clave de tu institución. Tu clave es :' . Auth::user()->clave . ' la clave en el archivo CSV es '
+            $mensaje_de_error = 'En la fila ' . $numero_renglon . ' del archivo CSV, la clave de institución 
+            no es congruente con la clave de tú institución. Tú clave es :' . Auth::user()->clave . ' y la clave en el archivo CSV es '
             . $clave_erronea;
         }
 

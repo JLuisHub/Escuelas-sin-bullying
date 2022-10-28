@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Area administrativa de directivos') }}
+                    {{ __('Área administrativa de directivos') }}
                 </div>
                 <div class="card-body card-header">
                     @if (session('status'))

@@ -34,13 +34,13 @@ class ReporteAPIController extends Controller
                 $reporte_temp->save();
             } catch(exception $e) {
                 return response()->json([
-                    'error' => 'ocurrio un error al guardar el reporte',
+                    'error' => 'Ocurrio un error al guardar el reporte',
                 ], 400);
             }
         }
 
         return response()->json([
-            'mensaje' => 'Se ha creado el reporte exitosamente',
+            'success' => 'Se ha creado el reporte exitosamente',
         ], Response::HTTP_OK);
 
     }
@@ -52,9 +52,13 @@ class ReporteAPIController extends Controller
         
         // Se compara el resultado obtenido
         if($reporte == 0){
-            return "Hubo un error al eliminar el reporte, intente más tarde";
+            return response() -> json([
+                'error' => "Hubo un error al eliminar el reporte, intente más tarde"
+            ],400);
         }else{
-            return "Eliminado con éxito";
+            return response() -> json([
+                'success' => "Eliminado con éxito"
+            ],Response::HTTP_OK);
         }
     }
 

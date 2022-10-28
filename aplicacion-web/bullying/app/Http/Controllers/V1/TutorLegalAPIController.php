@@ -4,6 +4,10 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
+use App\Models\EstudianteTutorLegal;
 
 class TutorLegalAPIController extends Controller
 {
@@ -37,10 +41,13 @@ class TutorLegalAPIController extends Controller
         $tutor_estudiante -> id_estudiante = $alumno[0]->id;
         try{
             $tutor_estudiante->save();
-            return "Guardado con éxito";
+            return response() -> json([
+                'success' =>"Guardado con éxito",
+            ], Response::HTTP_OK);
         }
         catch(exception $e){
-            return "Hubo un problema al guardar los datos, intente más tarde";
+            return response() -> json([
+                'error' =>"Hubo un problema al guardar los datos, intente más tarde"],400);
         }
     }
 }
