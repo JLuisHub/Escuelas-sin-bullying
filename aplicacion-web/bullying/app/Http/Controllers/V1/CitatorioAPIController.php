@@ -8,8 +8,9 @@ use App\Models\Reporte;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Citatorio;
+use App\Models\Estudiantes;
+use App\Models\Docentes;
 use Exception;
-use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 
 
@@ -66,11 +67,17 @@ class CitatorioAPIController extends Controller
         $citatorio_nuevo->id_estudiante = $request->id_estudiante;
         $citatorio_nuevo->descripcion = $request->descripcion;
         $citatorio_nuevo->fecha = $request->fecha; 
-        
-        return response()->json([
-            'message' => 'El citatorio se ha creado exitosamente.',
-        ], Response::HTTP_OK);
-
+        // Intentamos guardar el nuevo registro en la base de datos.
+        try{
+            $citatorio_nuevo->save();
+            return response()->json([
+                'success' => 'El citatorio se ha creado exitosamente.',
+            ], Response::HTTP_OK);
+        } catch(exception $e) {
+            return response()->json([
+                'error' => 'ocurrio un error al envíar el citatorio.',
+            ], 400);
+        }
     }
 
 
