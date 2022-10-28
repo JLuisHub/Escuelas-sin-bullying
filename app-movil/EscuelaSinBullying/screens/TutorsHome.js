@@ -1,11 +1,10 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, {useState} from 'react'
-import ReportsList from '../components/ReportsList'
 import CustomButton from '../components/CustomButton'
 import KidsList from '../components/KidsList'
 
 const TutorsHome = ({route, navigation}) => {
-    const {id} = 1
+    const {id} = route.params
 
     onPressAddStudent = () => {
         //Modificar

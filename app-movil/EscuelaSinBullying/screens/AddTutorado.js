@@ -7,8 +7,9 @@ import CustomButton from '../components/CustomButton'
 import {useNavigation} from '@react-navigation/native'
 
 const AddTutorado = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [clave, setClave] = useState('');
+    const [matricula, setMatricula] = useState('');
+    const [fecha, setFecha] = useState('');
 
     const navigation = useNavigation()
 
@@ -23,9 +24,9 @@ const AddTutorado = () => {
         } else {
             console.error("Email o Contraseña incorrectos")
         }*/
-
-        console.assert("Sesion iniciada")
-        navigation.navigate("ProfessorsHome",{clave:12345})
+        console.log(clave)
+        console.log(matricula)
+        console.log(fecha)
         
         //InsertRecord()
         //tryAPI()
@@ -96,24 +97,22 @@ const AddTutorado = () => {
             <Text style = {[styles.login_input_name]}>Clave de la escuela</Text>
             <CustomInput 
                 placeholder = "Introduzca la clave"
-                value = {email}
-                setValue = {setEmail}
+                value = {clave}
+                setValue = {setClave}
                 />
             
             <Text style = {[styles.login_input_name]}>Matricula</Text>
             <CustomInput 
                 placeholder = "Introduzca la matricula"
-                value = {password}
-                setValue = {setPassword}
-                secureTextEntry
+                value = {matricula}
+                setValue = {setMatricula}
                 />
 
             <Text style = {[styles.login_input_name]}>Fecha de nacimiento sin guiones</Text>
             <CustomInput 
                 placeholder = "ejemplo 22-10-22 sería 221022"
-                value = {password}
-                setValue = {setPassword}
-                secureTextEntry
+                value = {fecha}
+                setValue = {setFecha}
                 />
 
             <View style = {[styles.CustomButtonCont]}>

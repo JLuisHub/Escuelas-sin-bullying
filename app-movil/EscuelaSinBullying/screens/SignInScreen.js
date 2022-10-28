@@ -29,7 +29,8 @@ const SignInScreen = () => {
         }*/
 
         console.assert("Sesion iniciada")
-        navigation.navigate("ProfessorsHome",{clave:12345})
+        //navigation.navigate("ProfessorsHome",{clave:12345})
+        navigation.navigate("TutorsHome",{id:1})
         
         //InsertRecord()
         //tryAPI()
