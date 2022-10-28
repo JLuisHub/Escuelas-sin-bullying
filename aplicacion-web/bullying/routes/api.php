@@ -26,7 +26,7 @@ use App\Http\Controllers\V1\TutorLegalAPIController;
 
 // PARTE DE REYNA 
 Route::group(["auth:sanctum"],function(){
-    
+
     Route::get('estudiantes/{clave}',[EstudianteAPIController::class,'showAll']); // Pendiente
 
 });
@@ -61,15 +61,6 @@ Route::prefix('v1')->group(function () {
     Route::get('tutor_legal/notificaciones_citatorio/{id_tutor_legal}',[NotificacionesAPIController::class,'getNotificacionesCitatorio']);
     Route::post("tutor_legal/vincular", [TutorLegalAPIController::class,'store'] );
 
-// PARTE DE REYNA Y ROBERTO
-Route::group(["auth:sanctum"],function(){
-    Route::post("reporte", [ReporteAPIController::class,'store'] );
-    Route::delete("reportes/{id_reporte}",[ReporteAPIController::class,'destroy']);
-    Route::get('estudiantes/{clave}',[EstudianteAPIController::class,'showAll']);
-    Route::get('reportes/estudiante/{id}',[ReporteAPIController::class,'showEstudiante']);
-});
-
-
 Route::prefix('v1')->group(function () {
 
     Route::post('citatorio', [CitatorioAPIController::class, 'store']);
@@ -87,4 +78,6 @@ Route::prefix('v1')->group(function () {
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
 });
